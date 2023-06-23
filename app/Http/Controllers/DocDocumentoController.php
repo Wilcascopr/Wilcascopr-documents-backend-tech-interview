@@ -37,11 +37,11 @@ class DocDocumentoController extends Controller
             if ($request->has('search'))
                 $documentos = $documentos->where('nombre', 'like', '%' . $request->search . '%');
             
-            if ($request->has('tip_tipo_docs_id'))
-                $documentos = $documentos->where('tip_tipo_docs_id', $request->tip_tipo_docs_id);
+            if ($request->has('tip_tipo_docs'))
+                $documentos = $documentos->where('tip_tipo_docs_id', $request->tip_tipo_docs);
             
-            if ($request->has('pro_procesos_id'))
-                $documentos = $documentos->where('pro_procesos_id', $request->pro_procesos_id);
+            if ($request->has('pro_procesos'))
+                $documentos = $documentos->where('pro_procesos_id', $request->pro_procesos);
             
             $documentos = $documentos->get();
 
@@ -169,11 +169,36 @@ class DocDocumentoController extends Controller
             return response()->json([
                 'data' => $documento,
                 'message' => 'El documento se actualizó correctamente.'
-            ], 200);
+            ], 201);
 
         } catch (\Exception $error) {
             return response()->json([
                 'message' => 'Hubo un error al actualizar el documento. ' . $error->getMessage(),
+                'file' => $error->getFile(),
+                'line' => $error->getLine(),
+            ], 500);
+        }
+    }
+
+    public function destroy($id)
+    {
+        $validator = validator(['id' => $id], [
+            'id' => 'required|numeric|exists:doc_documentos,id',
+        ]);
+
+        if ($validator->fails()) 
+            return response()->json([
+                'message' => 'Hubo un error de validación. ' . $validator->errors()->first(),
+            ], 422);
+
+        try {
+            $this->Documento->where('id', $id)->delete();
+
+            return response()->json([], 201);
+
+        } catch (\Exception $error) {
+            return response()->json([
+                'message' => $error->getMessage(),
                 'file' => $error->getFile(),
                 'line' => $error->getLine(),
             ], 500);

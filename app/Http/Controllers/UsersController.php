@@ -10,14 +10,14 @@ class UsersController extends Controller
     public function __construct(\App\Models\User $users)
     {
         $this->users = $users;
-        $this->middleware('auth:sanctum', ['except' => ['logIn']]);
+        $this->middleware('auth:sanctum')->except(['logIn']);
     }
 
     public function logIn(Request $request)
     {
         $validator = validator($request->only('email', 'password'), [
             'email' => 'required|email|exists:users,email',
-            'password' => 'required|min:6'
+            'password' => 'required'
         ]);
 
         if ($validator->fails())
@@ -29,12 +29,12 @@ class UsersController extends Controller
 
             $user = $this->users->where('email', $request->email)->first();
 
-            if (!$user || !\Hash::check($request->password, $user->password))
+            if (!auth()->attempt($request->only('email', 'password')))
                 return response()->json([
                     'message' => 'Credenciales incorrectas.'
                 ], 401);
 
-            $token = $user->createToken('authToken')->plainTextToken;
+            $token = $user->createToken('auth_token')->plainTextToken;
 
             return response()->json([
                 'user' => $user,
@@ -50,10 +50,33 @@ class UsersController extends Controller
         }
     }
 
+    public function fetchUser()
+    {
+        try {
+            $user = auth('sanctum')->user();
+
+            if (!$user)
+                return response()->json([
+                    'message' => 'No se encontró el usuario.'
+                ], 404);
+
+            return response()->json([
+                'user' => $user
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Hubo un error al obtener el usuario. ' . $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine()
+            ], 500);
+        }
+    }
+
     public function logOut()
     {
         try {
-            $user = auth()->user();
+            $user = auth('sanctum')->user();
 
             if (!$user)
                 return response()->json([
@@ -61,6 +84,8 @@ class UsersController extends Controller
                 ], 404);
 
             $user->tokens()->delete();
+            request()->session()->invalidate();
+            request()->session()->regenerateToken();
 
             return response()->json([
                 'message' => 'Sesión cerrada correctamente.'

@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::controller(UsersController::class)->group(function () {
     Route::post('/users/login', 'logIn');
     Route::post('/users/logout', 'logOut');
+    Route::get('/users/me', 'fetchUser');
 });
 
 Route::controller(DocDocumentoController::class)->group(function () {
@@ -27,6 +28,7 @@ Route::controller(DocDocumentoController::class)->group(function () {
     Route::get('/doc-documentos/{id}', 'show');
     Route::post('/doc-documentos', 'store');
     Route::put('/doc-documentos/{id}', 'update');
+    Route::delete('/doc-documentos/{id}', 'destroy');
 });
 
 Route::get('/tip-tipo-docs', [TipTipoDocController::class, 'index']);
