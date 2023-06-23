@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\DocDocumentoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::controller(UsersController::class)->group(function () {
-    Route::post('/users/login', 'LogIn');
-    Route::post('/users/logout', 'LogOut');
+    Route::post('/users/login', 'logIn');
+    Route::post('/users/logout', 'logOut');
+});
+
+Route::controller(DocDocumentoController::class)->group(function () {
+    Route::get('/doc-documentos', 'index');
+    Route::get('/doc-documentos/{id}', 'show');
+    Route::post('/doc-documentos', 'store');
+    Route::put('/doc-documentos/{id}', 'update');
 });

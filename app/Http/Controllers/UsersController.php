@@ -13,7 +13,7 @@ class UsersController extends Controller
         $this->middleware('auth:sanctum', ['except' => ['LogIn']]);
     }
 
-    public function LogIn(Request $request)
+    public function logIn(Request $request)
     {
         $validator = validator($request->only('email', 'password'), [
             'email' => 'required|email|exists:users,email',
@@ -50,7 +50,7 @@ class UsersController extends Controller
         }
     }
 
-    public function LogOut()
+    public function logOut()
     {
         try {
             $user = auth()->user();
