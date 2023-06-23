@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\TipTipoDocController;
+use App\Http\Controllers\ProProcesosController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DocDocumentoController;
 use Illuminate\Support\Facades\Route;
@@ -26,3 +28,6 @@ Route::controller(DocDocumentoController::class)->group(function () {
     Route::post('/doc-documentos', 'store');
     Route::put('/doc-documentos/{id}', 'update');
 });
+
+Route::get('/tip-tipo-docs', [TipTipoDocController::class, 'index']);
+Route::get('/pro-procesos', [ProProcesosController::class, 'index']);

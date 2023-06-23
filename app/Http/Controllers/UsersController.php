@@ -10,7 +10,7 @@ class UsersController extends Controller
     public function __construct(\App\Models\User $users)
     {
         $this->users = $users;
-        $this->middleware('auth:sanctum', ['except' => ['LogIn']]);
+        $this->middleware('auth:sanctum', ['except' => ['logIn']]);
     }
 
     public function logIn(Request $request)
