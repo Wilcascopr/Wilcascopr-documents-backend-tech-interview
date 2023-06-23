@@ -1,66 +1,170 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Repositorios de código fuente - Aplicación Full Stack Documentos 
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+### [Backend](https://github.com/Wilcascopr/documents-backend-tech-interview)
 
-## About Laravel
+### [Frontend](https://github.com/Wilcascopr/documents-frontend-tech-interview)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Requisitos de instalación
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+A continuación se detallan los requisitos de instalación y configuración para desplegar la aplicación localmente:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP 8.1.2
+- MySQL 8.0
+- Composer (se utiliza para gestionar las dependencias del proyecto)
+- Node 18.16.0
 
-## Learning Laravel
+## Instrucciones de despliegue
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**Backend:**
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1. Clona el repositorio del backend en tu máquina local:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+   ```bash
+   git clone https://github.com/Wilcascopr/documents-backend-tech-interview
+   ```
 
-## Laravel Sponsors
+2. Navega al directorio del backend:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+   ```bash
+   cd documents-backend-tech-interview
+   ```
 
-### Premium Partners
+3. Copia el archivo de entorno de ejemplo y renómbralo a .env:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+   ```bash
+   cp .env.example .env
+   ```
 
-## Contributing
+4. Configura la conexión a la base de datos en el archivo .env. Modifica las siguientes variables de entorno de acuerdo a tu configuración:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+   ```makefile
+   DB_DATABASE=nombre_de_la_base_de_datos
+   DB_USERNAME=usuario_de_la_base_de_datos
+   DB_PASSWORD=contraseña_de_la_base_de_datos
+   ```
 
-## Code of Conduct
+5. Instala las dependencias del proyecto usando Composer:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+   ```bash
+   composer install
+   ```
 
-## Security Vulnerabilities
+6. Genera la clave de cifrado de la aplicación:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+   ```vbnet
+   php artisan key:generate
+   ```
 
-## License
+7. Ejecuta las migraciones de la base de datos para crear las tablas:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+   ```bash
+   php artisan migrate
+   ```
+
+8. Ejecuta los seeders para cargar datos iniciales en la base de datos:
+
+   ```bash
+   php artisan db:seed
+   ```
+
+9. Inicia el servidor de desarrollo de Laravel:
+
+   ```bash
+   php artisan serve
+   ```
+
+**Frontend:**
+
+1. Clona el repositorio del frontend en tu máquina local:
+
+   ```bash
+   git clone https://github.com/Wilcascopr/documents-frontend-tech-interview
+   ```
+
+2. Navega al directorio del frontend:
+
+   ```bash
+   cd documents-frontend-tech-interview
+   ```
+
+3. Modifica el archivo /src/services/api/api.js y actualiza la URL del backend con la dirección de tu servidor de desarrollo de Laravel (por defecto, 'http://localhost:8000').
+
+4. Instala las dependencias del proyecto:
+
+   ```bash
+   npm install
+   ```
+
+5. Inicia el servidor de desarrollo del frontend:
+
+   ```arduino
+   npm run serve
+   ```
+
+6. Accede a la aplicación en tu navegador web mediante la URL proporcionada por el servidor de desarrollo del frontend.
+
+## Credenciales de inicio de sesión
+
+- Usuario: testuser@email.com
+- Contraseña: testpassword
+
+## Funcionalidades de la aplicación
+
+La aplicación ofrece las siguientes funcionalidades:
+
+- Login de usuario: Permite a los usuarios iniciar sesión en la aplicación.
+- Logout de usuario: Permite a los usuarios cerrar sesión.
+- Tabla o grilla de datos de los documentos: Muestra una lista de documentos en una tabla.
+- Búsqueda de registros de documentos: Permite buscar documentos por diferentes criter
+
+ios.
+- Creación de registros de documentos: Permite crear nuevos documentos.
+- Edición de registros de documentos: Permite editar la información de los documentos existentes.
+- Eliminación de registros de documentos: Permite eliminar documentos de la base de datos.
+
+## Modelo de datos
+
+La aplicación utiliza las siguientes tablas en la base de datos:
+
+- **PRO_PROCESO**: Almacena los procesos con los siguientes campos:
+  - ID: Identificador único del proceso.
+  - NOMBRE: Nombre del proceso.
+  - PREFIJO: Prefijo del proceso.
+
+- **TIP_TIPO_DOC**: Almacena los tipos de documentos con los siguientes campos:
+  - ID: Identificador único del tipo de documento.
+  - NOMBRE: Nombre del tipo de documento.
+  - PREFIJO: Prefijo del tipo de documento.
+
+- **DOC_DOCUMENTO**: Almacena los registros de los documentos con los siguientes campos:
+  - ID: Identificador único del documento.
+  - NOMBRE: Nombre del documento.
+  - CODIGO: Código único del documento, generado automáticamente de acuerdo al siguiente lineamiento: TIP_PREFIJO - PRO_PREFIJO - \<ID\>.
+  - CONTENIDO: Contenido del documento.
+  - TIP_TIPO_DOCS_ID: Identificador del tipo de documento al que pertenece.
+  - PRO_PROCESOS_ID: Identificador del proceso al que pertenece.
+
+**Nota**: El programa genera un código único consecutivo para cada documento, siguiendo el lineamiento mencionado anteriormente. No se deben repetir los consecutivos para documentos del mismo tipo y proceso.
+
+## Tecnologías utilizadas
+
+La aplicación utiliza las siguientes tecnologías:
+
+- Backend:
+  - PHP 8.1.2
+  - Laravel
+
+- Frontend:
+  - Vue.js, generado con Vite.
+  - Vuex
+  - Vuetify
+  - Axios
+
+- Base de datos:
+  - MySQL 8.0
+
+- Herramientas y utilidades:
+  - Composer (Gestor de dependencias de PHP)
+  - npm (Gestor de paquetes de Node.js)
+
+Estas tecnologías se combinan para crear una aplicación web completa con funcionalidades de login de usuario, gestión de documentos, búsqueda y manipulación de registros, y una arquitectura cliente-servidor basada en Laravel en el backend y Vue.js en el frontend.
