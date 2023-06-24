@@ -98,7 +98,7 @@ A continuación se detallan los requisitos de instalación y configuración para
 5. Inicia el servidor de desarrollo del frontend:
 
    ```arduino
-   npm run serve
+   npm run dev
    ```
 
 6. Accede a la aplicación en tu navegador web mediante la URL proporcionada por el servidor de desarrollo del frontend.
