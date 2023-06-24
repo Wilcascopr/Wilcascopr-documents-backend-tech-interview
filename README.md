@@ -144,6 +144,9 @@ La aplicación utiliza las siguientes tablas en la base de datos:
   - TIP_TIPO_DOCS_ID: Identificador del tipo de documento al que pertenece.
   - PRO_PROCESOS_ID: Identificador del proceso al que pertenece.
 
+ ## Diagrama de clases
+ ![Diagrama de clases](https://i.ibb.co/7jkZCdm/Screenshot-2023-06-23-191304.png)
+
 **Nota**: El programa genera un código único consecutivo para cada documento, siguiendo el lineamiento mencionado anteriormente. No se deben repetir los consecutivos para documentos del mismo tipo y proceso.
 
 ## Tecnologías utilizadas
